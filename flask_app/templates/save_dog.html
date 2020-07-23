@@ -11,8 +11,8 @@
     <form action='/saved_dog' method="post">
       <label for='dogname'> Give this doggo a name: </label>
       <input type="text" id='dogname' name='dogname'>
-      <input type='hidden' id='dogbreed' value={{breed}}>
-      <input type="hidden" id='doglink' value={{picture}}>
+      <input type='hidden' id='dogbreed' name='dogbreed' value={{breed}}>
+      <input type="hidden" id='doglink' name='doglink' value={{picture}}>
       <input type="submit" value="Save Dog">
     </form>
   </body>

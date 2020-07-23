@@ -11,6 +11,7 @@ def create_app():
     app = Flask(__name__)
 
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DB_URI']
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     DB.init_app(app)
 
@@ -42,17 +43,23 @@ def create_app():
     def save_dog():
         json = requests.get('https://dog.ceo/api/breeds/image/random').json()
         image = json['message']
-        breed = image
-        return render_template('save_dog.html', picture=image, breed=image)
+        breed = image.split('/')[4]
+        return render_template('save_dog.html', picture=image, breed=breed)
 
     @app.route('/saved_dog', methods=['POST'])
     def saved_dog():
+
         image = request.values['doglink']
         breed = request.values['dogbreed']
-        name = request.values['name']
+        name = request.values['dogname']
         dog = Dog(dog=image, name=name, breed=breed)
         DB.session.add(dog)
         DB.session.commit()
-        return render_tempate('saved_dog.html', picture=image, breed=breed, name=name)
+        return render_template('saved_dog.html', picture=image, breed=breed, name=name)
+
+    @app.route('/saved_dogs')
+    def saved_dogs():
+        names = get_names()
+        return render_template('saved_dogs.html', names=names)
 
     return app

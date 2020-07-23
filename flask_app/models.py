@@ -1,7 +1,6 @@
-from flask_sqlalchemy import flask_sqlalchemy
-from . import APP
+from flask_sqlalchemy import SQLAlchemy
 
-DB = SQLAlchemy(APP)
+DB = SQLAlchemy()
 
 
 class Dog(DB.Model):
@@ -12,3 +11,9 @@ class Dog(DB.Model):
 
     def __str__(self):
         return f'{self.name} is a {self.breed} and can be found at {self.dog}'
+
+
+def get_names():
+    all = Dog.query.all()
+    names = [record['name'] for record in all]
+    return names
