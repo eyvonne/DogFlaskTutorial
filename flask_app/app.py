@@ -62,4 +62,11 @@ def create_app():
         names = get_names()
         return render_template('saved_dogs.html', names=names)
 
+    @app.route('/view_dog', methods=['POST'])
+    def view_dog():
+        name = request.values['dogname']
+        dog = Dog.query.filter_by(name=name).all()[0]
+        breakpoint()
+        return render_template('saved_dog.html', picture=dog.dog, name=dog.name, breed=dog.breed)
+
     return app

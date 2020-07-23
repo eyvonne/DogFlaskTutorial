@@ -15,5 +15,6 @@ class Dog(DB.Model):
 
 def get_names():
     all = Dog.query.all()
-    names = [record['name'] for record in all]
+
+    names = [record.name for record in all]
     return names

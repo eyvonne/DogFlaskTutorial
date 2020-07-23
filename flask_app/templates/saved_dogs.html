@@ -6,13 +6,12 @@
   </head>
   <body>
     <p> You have saved these dogs: </p>
+<ul>
     {% for dog in names %}
-    <ul>
       <li> {{ dog }} </li>
-    <ul>
     {% endfor %}
-
-    <form action="/view_dog">
+</ul>
+    <form action="/view_dog" method=post>
       <label for="dogname"> Choose a Dog </label>
       <select id="dogname" name="dogname">
         {% for dog in names %}
