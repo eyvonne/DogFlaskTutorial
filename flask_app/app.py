@@ -57,10 +57,10 @@ def create_app():
         DB.session.commit()
         return render_template('saved_dog.html', picture=image, breed=breed, name=name)
 
-    @app.route('/saved_dogs')
-    def saved_dogs():
+    @app.route('/dog_list') # need to change everything to dog_list
+    def dog_list():
         names = get_names()
-        return render_template('saved_dogs.html', names=names)
+        return render_template('dog_list.html', names=names)
 
     @app.route('/view_dog', methods=['POST'])
     def view_dog():
